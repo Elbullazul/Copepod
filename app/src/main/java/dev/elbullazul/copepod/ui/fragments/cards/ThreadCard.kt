@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.sp
 import dev.elbullazul.copepod.R
 import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.render.MarkdownBody
-import dev.elbullazul.copepod.ui.fragments.common.CardFooter
-import dev.elbullazul.copepod.ui.fragments.common.CardHeader
+import dev.elbullazul.copepod.ui.fragments.cards.common.CardFooter
+import dev.elbullazul.copepod.ui.fragments.cards.common.CardHeader
 import dev.elbullazul.copepod.api.kbin.models.Thread
 import dev.elbullazul.copepod.ui.theme.CopepodTheme
 

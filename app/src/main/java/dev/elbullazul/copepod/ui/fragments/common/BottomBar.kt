@@ -1,35 +1,32 @@
-package dev.elbullazul.copepod.ui.fragments.navigation
+package dev.elbullazul.copepod.ui.fragments.common
 
-import android.content.Context
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.elbullazul.copepod.R
 import dev.elbullazul.copepod.ui.helpers.ShowToast
+import androidx.compose.runtime.getValue
 
 @Composable
-fun BottomBar() {
-    // val selected = remember { mutableStateOf(BottomIcons.MENU) }
+fun BottomBar(navController: NavHostController) {
     val context = LocalContext.current
 
-    BottomAppBar(
-        //containerColor = MaterialTheme.colorScheme.background.copy(alpha = .5f),
-        //modifier = Modifier.height(40.dp)) {
-    ) {
+    // observe the backstack, change selected state based on current entry
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    BottomAppBar {
         NavigationBarItem(
             icon = {
                 Icon(Icons.Outlined.Home, contentDescription = "home")
@@ -37,9 +34,9 @@ fun BottomBar() {
             label = {
                 Text(stringResource(R.string.home))
             },
-            selected = true,
+            selected = (currentRoute == "home"),
             onClick = {
-                ShowToast(context, "Hi!")
+                navController.navigate("home")
             }
         )
         NavigationBarItem(
@@ -49,9 +46,9 @@ fun BottomBar() {
             label = {
                 Text(stringResource(R.string.magazines))
             },
-            selected = false,
+            selected = (currentRoute == "thread"),
             onClick = {
-                ShowToast(context, "Hi!")
+                navController.navigate("thread")
             }
         )
         NavigationBarItem(

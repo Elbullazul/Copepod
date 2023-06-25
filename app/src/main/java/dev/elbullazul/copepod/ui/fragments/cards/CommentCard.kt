@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.dp
 import dev.elbullazul.copepod.api.kbin.data.TEST_COMMENTS
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.render.MarkdownBody
-import dev.elbullazul.copepod.ui.fragments.common.CardFooter
-import dev.elbullazul.copepod.ui.fragments.common.CardHeader
+import dev.elbullazul.copepod.ui.fragments.cards.common.CardFooter
+import dev.elbullazul.copepod.ui.fragments.cards.common.CardHeader
 import dev.elbullazul.copepod.ui.theme.CopepodTheme
 
 // TODO: support comment tree (connect to parent comment node)

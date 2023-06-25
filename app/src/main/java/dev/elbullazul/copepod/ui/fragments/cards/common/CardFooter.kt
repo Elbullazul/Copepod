@@ -1,4 +1,4 @@
-package dev.elbullazul.copepod.ui.fragments.common
+package dev.elbullazul.copepod.ui.fragments.cards.common
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
