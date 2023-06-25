@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Copepod</string>
+    <string name="comments">Comments</string>
+    <string name="threads">Threads</string>
+    <string name="blogs">Blogs</string>
+    <string name="show_replies">Show replies</string>
+    <string name="show_boosts">Show boosts</string>
+    <string name="replies">replies</string>
+    <string name="upvote">upvote</string>
+    <string name="downvote">downvote</string>
+    <string name="boost">boost</string>
+    <string name="favorite">favorite</string>
+    <string name="bookmark">bookmark</string>
+    <string name="reply">reply</string>
+    <string name="home">Home</string>
+    <string name="magazines">Magazines</string>
+    <string name="settings">Settings</string>
 </resources>

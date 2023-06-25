@@ -1,4 +1,4 @@
-package dev.elbullazul.copepod.ui.components
+package dev.elbullazul.copepod.ui.fragments.cards
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,12 +15,12 @@ import dev.elbullazul.copepod.api.kbin.models.User
 // TODO: could be reused for magazine/community header
 
 @Composable
-fun UserProfileHeader(user: User) {
+fun UserProfileCard(user: User) {
     Column(modifier = Modifier.padding(15.dp)) {
         // TODO: user header composable?
         Row {
             Icon(Icons.Outlined.Person, contentDescription = "user avatar")
-            Text(text = user.userName)
+            Text(text = user.name)
         }
         Text("<user description goes here>", modifier = Modifier.padding(vertical = 10.dp))
     }

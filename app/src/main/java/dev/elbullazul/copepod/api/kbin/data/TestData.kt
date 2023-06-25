@@ -1,18 +1,19 @@
 package dev.elbullazul.copepod.api.kbin.data
 
 import dev.elbullazul.copepod.api.kbin.models.Comment
+import dev.elbullazul.copepod.api.kbin.models.Magazine
 import dev.elbullazul.copepod.api.kbin.models.User
 import dev.elbullazul.copepod.api.kbin.models.Thread
 import java.util.Date
 
-var TEST_USERS = listOf<User>(
-    User("elbullazul", "", "Elbullazul"),
-    User("stux", "", "stux"),
-    User("thedude", "", "TheDude"),
-    User("ruud", "", "Ruud")
+var TEST_USERS = listOf(
+    User("/api/users/elbullazul", "elbullazul"),
+    User("u.fail/u/stux", "stux 😸"),
+    User("sh.itjust.works/u/thedude", "TheDude"),
+    User("lemmy.world/u/ruud", "ruud")
 )
 
-var TEST_COMMENTS = listOf<Comment>(
+var TEST_COMMENTS = listOf(
     Comment(
         creator = TEST_USERS[0],
         created = Date(),
@@ -20,7 +21,6 @@ var TEST_COMMENTS = listOf<Comment>(
         url = "",
         originUrl = "",
         replies = emptyList(),
-        //parent = Thread(),
         upvotes = 15,
         downvotes = 3,
         boosts = 5
@@ -32,7 +32,6 @@ var TEST_COMMENTS = listOf<Comment>(
         url = "",
         originUrl = "",
         replies = emptyList(),
-//        parent = Thread(),
         upvotes = 150,
         downvotes = 3,
         boosts = 17
@@ -44,7 +43,6 @@ var TEST_COMMENTS = listOf<Comment>(
         url = "",
         originUrl = "",
         replies = emptyList(),
-//        parent = Thread(),
         upvotes = 4,
         downvotes = 0,
         boosts = 0
@@ -56,14 +54,19 @@ var TEST_COMMENTS = listOf<Comment>(
         url = "",
         originUrl = "",
         replies = emptyList(),
-//        parent = Thread(),
         upvotes = 14,
         downvotes = 0,
         boosts = 2
     )
 )
 
-var TEST_THREADS = listOf<Thread>(
+var TEST_MAGAZINES = listOf(
+    Magazine("/m/linux", "Linux"),
+    Magazine("/m/cs", "Counter-strike"),
+    Magazine("lemmy.world/c/selfhosted", "Self-hosted")
+)
+
+var TEST_THREADS = listOf(
     Thread(
         creator = TEST_USERS[0],
         created = Date(),
@@ -73,12 +76,13 @@ var TEST_THREADS = listOf<Thread>(
                 "To me (opinion here), sorting by “new” should sort of be a timestampped thing: I want “new as of right now but nothing more”. If I refresh, sure update me to the latest. But a list that’s live updating as things happen? That’s… not useful to me.\n" +
                 "\n" +
                 "Am I missing something, or does anyone else feel similarly?",
+        magazine = TEST_MAGAZINES[0],
         upvotes = 10,
         downvotes = 5,
         boosts = 0,
         url = "https://kbin.social/",
         originUrl = "https://kbin.social/",
-        replies = listOf<Comment>(
+        replies = listOf(
             TEST_COMMENTS[0],
             TEST_COMMENTS[1]
         )
@@ -88,12 +92,13 @@ var TEST_THREADS = listOf<Thread>(
         created = Date(),
         title = "Reddit? u.fail!",
         body = "![img](https://imgur.com/logo.png)",
+        magazine = TEST_MAGAZINES[0],
         upvotes = 100,
         downvotes = 0,
         boosts = 0,
         url = "https://u.fail/",
         originUrl = "",
-        replies = listOf<Comment>(
+        replies = listOf(
             TEST_COMMENTS[0]
         )
     ),
@@ -102,12 +107,13 @@ var TEST_THREADS = listOf<Thread>(
         created = Date(),
         title = "sh.itjust.works is now live!",
         body = "**Bold statements only on this line!**",
+        magazine = TEST_MAGAZINES[1],
         upvotes = 75,
         downvotes = 0,
         boosts = 0,
         url = "https://sh.itjust.works/",
         originUrl = "",
-        replies = listOf<Comment>(
+        replies = listOf(
             TEST_COMMENTS[0],
             TEST_COMMENTS[1],
             TEST_COMMENTS[2],
@@ -119,6 +125,7 @@ var TEST_THREADS = listOf<Thread>(
         created = Date(),
         title = "Welcome to Lemmy.world!",
         body = "# Glad to see so many new people joining us!",
+        magazine = TEST_MAGAZINES[2],
         upvotes = 50,
         downvotes = 1,
         boosts = 0,

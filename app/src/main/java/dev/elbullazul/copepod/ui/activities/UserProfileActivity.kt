@@ -21,23 +21,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.elbullazul.copepod.ui.components.CommentCard
-import dev.elbullazul.copepod.ui.theme.CopepodTheme
 
 // fix "Type '' has no getValue for mutableStateOf"
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import dev.elbullazul.copepod.api.common.Post
+import androidx.compose.ui.res.stringResource
+import dev.elbullazul.copepod.ui.fragments.cards.CommentCard
+import dev.elbullazul.copepod.ui.theme.CopepodTheme
+import dev.elbullazul.copepod.R
+import dev.elbullazul.copepod.api.common.models.Post
 import dev.elbullazul.copepod.api.kbin.models.Thread
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.api.kbin.data.TEST_COMMENTS
 import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
-import dev.elbullazul.copepod.api.kbin.models.User
-import dev.elbullazul.copepod.ui.components.ThreadCard
-import dev.elbullazul.copepod.ui.components.UserProfileHeader
-import dev.elbullazul.copepod.ui.components.navigation.BottomNavBar
-import dev.elbullazul.copepod.ui.components.navigation.HeaderAppBar
+import dev.elbullazul.copepod.api.kbin.data.TEST_USERS
+import dev.elbullazul.copepod.ui.fragments.cards.ThreadCard
+import dev.elbullazul.copepod.ui.fragments.cards.UserProfileCard
+import dev.elbullazul.copepod.ui.fragments.navigation.BottomBar
+import dev.elbullazul.copepod.ui.fragments.navigation.HeaderBar
+import dev.elbullazul.copepod.ui.fragments.views.CommentListView
+import dev.elbullazul.copepod.ui.fragments.views.ThreadListView
+import dev.elbullazul.copepod.ui.fragments.views.UserProfileView
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 open class UserProfileActivity : ComponentActivity() {
@@ -45,10 +50,9 @@ open class UserProfileActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // get data
-        var userComments = TEST_COMMENTS
-        var userThreads = TEST_THREADS
-        var userBlogs = emptyList<Post>()
-        var userReplies = emptyList<Post>()
+        val userComments = TEST_COMMENTS
+        val userThreads = TEST_THREADS
+        val userBlogs = emptyList<Post>()
 
         setContent {
             CopepodTheme {
@@ -56,81 +60,17 @@ open class UserProfileActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // TODO: app header
-                    val context = LocalContext.current
-
                     Scaffold(
-                        topBar = { HeaderAppBar() },
-                        bottomBar = { BottomNavBar(context) }
+                        topBar = { HeaderBar() },
+                        bottomBar = { BottomBar() }
                     ) { contentPadding ->
                         Column(modifier = Modifier.padding(contentPadding)) {
-                            UserProfileView(userComments, userThreads, userBlogs, userReplies)
+                            UserProfileView(userComments, userThreads, userBlogs)
                             Spacer(Modifier.weight(1f))
                         }
                     }
-
-
-                    // TODO: navbar
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun UserProfileView(comments: List<Comment>, threads: List<Thread>, blogs: List<Post>, replies: List<Post>) {
-    val tabList = listOf("Comments", "Threads", "Blogs", "Replies")
-    var tabIndex by remember { mutableStateOf(0) }
-    val context = LocalContext.current
-    val user = User("elbullazul", "", "Elbullazul")
-
-    Column {//(modifier = Modifier.fillMaxSize()) {
-        // user header
-        UserProfileHeader(user)
-
-        // user submission tabs
-        TabRow(selectedTabIndex = tabIndex) {
-            tabList.forEachIndexed { index, text ->
-                Tab(selected = (tabIndex == index), onClick = {
-                    tabIndex = index
-                }, text = {
-                    Text(text = text)
-                })
-            }
-        }
-        when (tabIndex) {
-            0 -> LazyColumn {
-                // TODO: make a CommentList component?
-                for (comment in comments) {
-                    item {
-                        CommentCard(comment)
-
-                        // divider only if not last
-                        if (comment != comments.last()) {
-                            Divider(modifier = Modifier.padding(0.dp, 5.dp))
-                        }
-                    }
-                }
-            }
-            // TODO: composable Timeline
-            1 -> LazyColumn {
-                // TODO: make a ThreadView component?
-
-                for (thread in threads) {
-                    item {
-                        ThreadCard(thread = thread, onClick = {
-                            ShowToast(context, "opening thread ${thread.title}")
-                        })
-
-                        if (thread != threads.last()) {
-                            Divider(modifier = Modifier.padding(0.dp, 5.dp))
-                        }
-                    }
-                }
-            }
-            // TODO: composable Blog
-            2 -> Text("Blogs")
-            3 -> Text("Replies")
         }
     }
 }
@@ -144,7 +84,7 @@ fun UserProfilePreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            UserProfileView(TEST_COMMENTS, TEST_THREADS, emptyList(), emptyList())
+            UserProfileView(TEST_COMMENTS, TEST_THREADS, emptyList())
         }
     }
 }
