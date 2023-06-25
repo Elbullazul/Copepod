@@ -14,55 +14,115 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.elbullazul.copepod.R
+import dev.elbullazul.copepod.api.common.actions.Boosts
+import dev.elbullazul.copepod.api.common.actions.DOWNVOTED
+import dev.elbullazul.copepod.api.common.actions.Favorites
+import dev.elbullazul.copepod.api.common.actions.NOT_VOTED
+import dev.elbullazul.copepod.api.common.actions.UPVOTED
+import dev.elbullazul.copepod.api.common.actions.Votes
+import dev.elbullazul.copepod.api.common.models.Post
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun CommentActionButton(icon: ImageVector, text: String, description: String, onClick: () -> Unit) {
+fun CommentActionButton(icon: ImageVector, text: String, description: String, pressed: Boolean, onClick: () -> Unit) {
     TextButton(contentPadding = PaddingValues(0.dp), onClick = onClick) {
+        val color: Color
+
+        if (pressed) {
+            color = MaterialTheme.colorScheme.primary
+        }
+        else {
+            color = MaterialTheme.colorScheme.secondary
+        }
+
         Icon(
             imageVector = icon,
             contentDescription = description,
             modifier = Modifier.padding(0.dp),
-            tint = MaterialTheme.colorScheme.secondary
+            tint = color
         )
-        Text(text = text, color = MaterialTheme.colorScheme.secondary)
+        Text(text = text, color = color)
     }
 }
 
-// TODO: toggle on load if already marked as upvoted
 @Composable
-fun CardFooter(upvotes: Int, downvotes: Int) {
+fun CardFooter(post: Post) {
     val context = LocalContext.current
-
-    // TODO: shorten vote amount if over 1000 (ex. 1587 votes -> 1.5k?)
 
     BottomAppBar(
         containerColor = MaterialTheme.colorScheme.background.copy(alpha = .5f),
-        modifier = Modifier.height(40.dp)) {
-
+        modifier = Modifier.height(40.dp)
+    ) {
         Spacer(Modifier.weight(1f))
 
-        CommentActionButton(Icons.Outlined.KeyboardArrowUp, upvotes.toString(), stringResource(R.string.upvote), onClick = {
-            ShowToast(context, "Upvoted")
-        })
+        if (post is Votes) {
+            // TODO: fix pressed state check
+            CommentActionButton(
+                icon = Icons.Outlined.KeyboardArrowUp,
+                text = post.upvotes.toString(),
+                description = stringResource(R.string.upvote),
+                pressed = (post.vote == UPVOTED),
+                onClick = {
+                    ShowToast(context, "Upvoted")
+                    post.vote = UPVOTED
+                }
+            )
+            CommentActionButton(
+                icon = Icons.Outlined.KeyboardArrowDown,
+                text = post.downvotes.toString(),
+                description = stringResource(R.string.downvote),
+                pressed = (post.vote == DOWNVOTED),
+                onClick = {
+                    ShowToast(context, "Downvoted")
+                    post.vote = DOWNVOTED
+                }
+            )
+        }
 
-        CommentActionButton(Icons.Outlined.KeyboardArrowDown, downvotes.toString(), stringResource(R.string.downvote), onClick = {
-            ShowToast(context, "Downvoted")
-        })
+        if (post is Boosts) {
+            CommentActionButton(
+                icon = Icons.Outlined.Refresh,
+                text = post.boosts.toString(),
+                description = stringResource(R.string.favorite),
+                pressed = post.boosted,
+                onClick = {
+                    ShowToast(context, "bookmarked")
+                    post.boosted = !post.boosted
+                }
+            )
+        }
 
-        CommentActionButton(Icons.Outlined.Star, "", stringResource(R.string.favorite), onClick = {
-            ShowToast(context, "bookmarked")
-        })
+        if (post is Favorites) {
+            CommentActionButton(
+                icon = Icons.Outlined.Star,
+                text = post.favorites.toString(),
+                description = stringResource(R.string.favorite),
+                pressed = false,
+                onClick = {
+                    ShowToast(context, "bookmarked")
+                    post.favorited = !post.favorited
+                }
+            )
+        }
 
-        CommentActionButton(Icons.Outlined.Send, "", stringResource(R.string.reply), onClick = {
-            ShowToast(context, "coming soon!")
-        })
+        // TODO: make conditional as well
+        CommentActionButton(
+            icon = Icons.Outlined.Send,
+            text = "",
+            description = stringResource(R.string.reply),
+            pressed = false,
+            onClick = {
+                ShowToast(context, "coming soon!")
+            }
+        )
     }
 }

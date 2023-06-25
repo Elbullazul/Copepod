@@ -1,6 +1,5 @@
 package dev.elbullazul.copepod.ui.fragments.views
 
-import android.app.LocaleConfig
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
@@ -21,7 +20,7 @@ fun ThreadListView(threads: List<Thread>) {
 
         for (thread in threads) {
             item {
-                ThreadCard(thread = thread, onClick = {
+                ThreadCard(post = thread, onClick = {
                     ShowToast(context, "opening thread ${thread.title}")
                 })
 
@@ -31,4 +30,13 @@ fun ThreadListView(threads: List<Thread>) {
             }
         }
     }
+
+    // events
+//    onThreadClick()
+//    onUserClick()
+//    onMagazineClick
+//    onUpvoteClick
+//    onDownvoteClick
+//    onBoostClick()
+//    onFavoriteClick
 }

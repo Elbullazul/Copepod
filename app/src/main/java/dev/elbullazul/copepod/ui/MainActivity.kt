@@ -1,4 +1,4 @@
-package dev.elbullazul.copepod.ui.activities
+package dev.elbullazul.copepod.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,13 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import dev.elbullazul.copepod.api.kbin.data.TEST_COMMENTS
-import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.ui.fragments.common.BottomBar
-import dev.elbullazul.copepod.ui.fragments.common.HeaderBar
-import dev.elbullazul.copepod.ui.fragments.views.ThreadListView
-import dev.elbullazul.copepod.ui.fragments.views.ThreadView
-import dev.elbullazul.copepod.ui.fragments.views.UserProfileView
+import dev.elbullazul.copepod.ui.fragments.common.TopBar
+import dev.elbullazul.copepod.ui.navigation.Overview
+import dev.elbullazul.copepod.ui.navigation.Screens
 import dev.elbullazul.copepod.ui.theme.CopepodTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +30,8 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 fun App() {
-    // DEBUG val context = LocalContext.current
+    // DEBUG
+//    val context = LocalContext.current
     val navController = rememberNavController()
 
     CopepodTheme {
@@ -43,19 +41,13 @@ fun App() {
             color = MaterialTheme.colorScheme.background
         ) {
             Scaffold(
-                topBar = { HeaderBar() },
+                topBar = { TopBar() },
                 bottomBar = { BottomBar(navController = navController) }
             ) { contentPadding ->
-                NavHost(navController = navController, startDestination = "home", modifier = Modifier.padding(contentPadding)) {
-                    composable("home") { ThreadListView(threads = TEST_THREADS) }
-                    composable("user") {
-                        UserProfileView(
-                            comments = TEST_COMMENTS,
-                            threads = TEST_THREADS,
-                            blogs = emptyList()
-                        )
+                NavHost(navController = navController, startDestination = Overview.route, modifier = Modifier.padding(contentPadding)) {
+                    for (navItem in Screens.NavItems) {
+                        composable(navItem.route) { navItem.view() }
                     }
-                    composable("thread") { ThreadView(thread = TEST_THREADS[2]) }
                 }
             }
         }

@@ -15,7 +15,7 @@ import dev.elbullazul.copepod.api.common.models.Post
 import dev.elbullazul.copepod.api.kbin.data.TEST_USERS
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.api.kbin.models.Thread
-import dev.elbullazul.copepod.ui.fragments.cards.UserProfileCard
+import dev.elbullazul.copepod.ui.fragments.cards.ProfileCard
 
 @Composable
 fun UserProfileView(comments: List<Comment>, threads: List<Thread>, blogs: List<Post>) {
@@ -29,7 +29,7 @@ fun UserProfileView(comments: List<Comment>, threads: List<Thread>, blogs: List<
 
     Column {
         // user header
-        UserProfileCard(user)
+        ProfileCard(user)
 
         // user submission tabs
         TabRow(selectedTabIndex = tabIndex) {

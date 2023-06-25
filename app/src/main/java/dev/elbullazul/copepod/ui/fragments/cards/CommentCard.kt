@@ -29,7 +29,7 @@ fun CommentCard(comment: Comment) {
             CardHeader(creator = comment.creator.name, created = comment.created)
             MarkdownBody(comment.body)
         }
-        CardFooter(upvotes = comment.upvotes, downvotes = comment.downvotes)
+        CardFooter(comment)
     }
 }
 

@@ -17,6 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.elbullazul.copepod.R
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 import androidx.compose.runtime.getValue
+import dev.elbullazul.copepod.ui.navigation.Screens
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -27,53 +28,13 @@ fun BottomBar(navController: NavHostController) {
     val currentRoute = navBackStackEntry?.destination?.route
 
     BottomAppBar {
-        NavigationBarItem(
-            icon = {
-                Icon(Icons.Outlined.Home, contentDescription = "home")
-            },
-            label = {
-                Text(stringResource(R.string.home))
-            },
-            selected = (currentRoute == "home"),
-            onClick = {
-                navController.navigate("home")
-            }
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(Icons.Outlined.List, contentDescription = "magazines")
-            },
-            label = {
-                Text(stringResource(R.string.magazines))
-            },
-            selected = (currentRoute == "thread"),
-            onClick = {
-                navController.navigate("thread")
-            }
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(Icons.Outlined.Create, contentDescription = "blogs")
-            },
-            label = {
-                Text(stringResource(R.string.blogs))
-            },
-            selected = false,
-            onClick = {
-                ShowToast(context, "Hi!")
-            }
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(Icons.Outlined.Settings, contentDescription = "settings")
-            },
-            label = {
-                Text(stringResource(R.string.settings))
-            },
-            selected = false,
-            onClick = {
-                ShowToast(context, "Hi!")
-            }
-        )
+        for (navItem in Screens.NavItems) {
+            NavigationBarItem(
+                icon = { Icon(navItem.icon, contentDescription = navItem.route) },
+                label = { Text(stringResource(navItem.label)) },
+                selected = (currentRoute == navItem.route),
+                onClick = { navController.navigate(navItem.route) }
+            )
+        }
     }
 }
