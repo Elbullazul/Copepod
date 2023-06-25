@@ -1,13 +1,14 @@
 package dev.elbullazul.copepod.api.kbin.models
 
 import dev.elbullazul.copepod.api.common.models.Post
-import dev.elbullazul.copepod.api.common.interfaces.Blogs
-import dev.elbullazul.copepod.api.common.interfaces.Votes
+import dev.elbullazul.copepod.api.common.actions.Boosts
+import dev.elbullazul.copepod.api.common.actions.Favorites
+import dev.elbullazul.copepod.api.common.actions.Votes
 import java.util.Date
 
 class Comment(creator: User, created: Date, body: String, url: String, originUrl: String, replies: List<Post>, upvotes: Int, downvotes: Int, boosts: Int):
     Post(creator, created, body, url, originUrl, replies),
-    Votes, Blogs {
+    Votes, Boosts, Favorites {
 
     // assign manually
     var parent: Post? = null

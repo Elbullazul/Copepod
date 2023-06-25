@@ -1,12 +1,13 @@
 package dev.elbullazul.copepod.api.kbin.models
 
 import dev.elbullazul.copepod.api.common.models.Post
-import dev.elbullazul.copepod.api.common.interfaces.Blogs
-import dev.elbullazul.copepod.api.common.interfaces.Votes
+import dev.elbullazul.copepod.api.common.actions.Boosts
+import dev.elbullazul.copepod.api.common.actions.Favorites
+import dev.elbullazul.copepod.api.common.actions.Votes
 import java.util.Date
 
 class Thread(): Post(),
-    Votes, Blogs {
+    Votes, Boosts, Favorites {
 
     var title: String = ""
     var magazine: Magazine = Magazine()

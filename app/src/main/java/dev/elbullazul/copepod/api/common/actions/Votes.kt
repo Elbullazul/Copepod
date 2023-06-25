@@ -1,4 +1,4 @@
-package dev.elbullazul.copepod.api.common.interfaces
+package dev.elbullazul.copepod.api.common.actions
 
 interface Votes {
     var upvotes: Int
