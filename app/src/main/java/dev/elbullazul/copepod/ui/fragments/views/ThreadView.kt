@@ -14,7 +14,7 @@ import dev.elbullazul.copepod.ui.fragments.cards.ThreadCard
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun ThreadView() {
+fun ThreadView(threadId: String? = "0") {
     val context = LocalContext.current
     val thread = TEST_THREADS[2]
 

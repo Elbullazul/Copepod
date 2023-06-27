@@ -26,7 +26,7 @@ fun CommentCard(comment: Comment) {
     // TODO: apply horizontal padding to everything minus the Footer
     Column {
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-            CardHeader(creator = comment.creator.name, created = comment.created)
+            CardHeader(comment)
             MarkdownBody(comment.body)
         }
         CardFooter(comment)

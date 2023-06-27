@@ -50,7 +50,7 @@ fun UserProfileView(userId: String? = null) {
         }
         when (tabIndex) {
             0 -> CommentListView()  // specify comment Id
-            1 -> ThreadListView()   // specify magazine if mag view desired
+//            1 -> ThreadListView()   // specify magazine if mag view desired
             2 -> Text("Blogs")
         }
     }

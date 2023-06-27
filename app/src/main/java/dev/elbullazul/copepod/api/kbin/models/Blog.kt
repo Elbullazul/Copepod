@@ -5,6 +5,7 @@ import dev.elbullazul.copepod.api.common.models.Post
 import java.util.Date
 
 class Blog(
+    id: String = "",
     creator: User = User(),
     created: Date = Date(),
     body: String = "",
@@ -14,4 +15,4 @@ class Blog(
 
     override var boosts: Int = 0,
     override var boosted: Boolean = false
-): Post(creator, created, body, url, originUrl, replies),Boosts
+): Post(id, creator, created, body, url, originUrl, replies),Boosts

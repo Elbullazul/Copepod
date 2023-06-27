@@ -31,7 +31,7 @@ import dev.elbullazul.copepod.api.common.models.Post
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun CommentActionButton(icon: ImageVector, text: String, description: String, pressed: Boolean, onClick: () -> Unit) {
+fun ActionButton(icon: ImageVector, text: String, description: String, pressed: Boolean, onClick: () -> Unit) {
     TextButton(contentPadding = PaddingValues(0.dp), onClick = onClick) {
 
         val color: Color = if (pressed) {
@@ -62,62 +62,62 @@ fun CardFooter(post: Post) {
 
         if (post is Votes) {
             // TODO: fix pressed state check
-            CommentActionButton(
+            ActionButton(
                 icon = Icons.Outlined.KeyboardArrowUp,
                 text = post.upvotes.toString(),
                 description = stringResource(R.string.upvote),
                 pressed = (post.vote == VoteStatus.UPVOTED),
                 onClick = {
-                    ShowToast(context, "Upvoted")
+                    ShowToast(context, "upvoting ${post.id}")
                     post.vote = VoteStatus.UPVOTED
                 }
             )
-            CommentActionButton(
+            ActionButton(
                 icon = Icons.Outlined.KeyboardArrowDown,
                 text = post.downvotes.toString(),
                 description = stringResource(R.string.downvote),
                 pressed = (post.vote == VoteStatus.DOWNVOTED),
                 onClick = {
-                    ShowToast(context, "Downvoted")
+                    ShowToast(context, "downvoting ${post.id}")
                     post.vote = VoteStatus.DOWNVOTED
                 }
             )
         }
 
         if (post is Boosts) {
-            CommentActionButton(
+            ActionButton(
                 icon = Icons.Outlined.Refresh,
                 text = post.boosts.toString(),
                 description = stringResource(R.string.favorite),
                 pressed = post.boosted,
                 onClick = {
-                    ShowToast(context, "bookmarked")
+                    ShowToast(context, "boosted ${post.id}")
                     post.boosted = !post.boosted
                 }
             )
         }
 
         if (post is Favorites) {
-            CommentActionButton(
+            ActionButton(
                 icon = Icons.Outlined.Star,
                 text = post.favorites.toString(),
                 description = stringResource(R.string.favorite),
                 pressed = false,
                 onClick = {
-                    ShowToast(context, "bookmarked")
+                    ShowToast(context, "favorited ${post.id}")
                     post.favorited = !post.favorited
                 }
             )
         }
 
         // TODO: make conditional as well
-        CommentActionButton(
+        ActionButton(
             icon = Icons.Outlined.Send,
             text = "",
             description = stringResource(R.string.reply),
             pressed = false,
             onClick = {
-                ShowToast(context, "coming soon!")
+                ShowToast(context, "replying to post ${post.id}")
             }
         )
     }

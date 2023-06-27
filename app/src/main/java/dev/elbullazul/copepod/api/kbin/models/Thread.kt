@@ -7,6 +7,7 @@ import dev.elbullazul.copepod.api.common.interfaces.Votes
 import java.util.Date
 
 class Thread(
+    id: String = "",
     creator: User = User(),
     created: Date = Date(),
     body: String = "",
@@ -23,5 +24,5 @@ class Thread(
 
     override var boosts: Int = 0,
     override var boosted: Boolean = false
-): Post(creator, created, body, url, originUrl, replies),
+): Post(id, creator, created, body, url, originUrl, replies),
     Votes, Boosts

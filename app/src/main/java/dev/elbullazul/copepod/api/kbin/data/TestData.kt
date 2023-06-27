@@ -69,6 +69,7 @@ var TEST_MAGAZINES = listOf(
 
 var TEST_THREADS = listOf(
     Thread(
+        id = "lemmy.ml-hi",
         creator = TEST_USERS[0],
         created = Date(),
         title = "Interesting title",
@@ -89,6 +90,7 @@ var TEST_THREADS = listOf(
         )
     ),
     Thread(
+        id = "u.fail-cats",
         creator = TEST_USERS[1],
         created = Date(),
         title = "Reddit? u.fail!",
@@ -104,6 +106,7 @@ var TEST_THREADS = listOf(
         )
     ),
     Thread(
+        id = "sh.itjust.works-statement",
         creator = TEST_USERS[2],
         created = Date(),
         title = "sh.itjust.works is now live!",
@@ -122,6 +125,7 @@ var TEST_THREADS = listOf(
         )
     ),
     Thread(
+        id = "lemmy.world-back-up",
         creator = TEST_USERS[3],
         created = Date(),
         title = "Welcome to Lemmy.world!",

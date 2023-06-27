@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,17 +31,30 @@ fun ThreadCard(post: Post, onClick: (Int) -> Unit) {
     Column {
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             if (post is Thread) {
-                //Text(post.magazine.name, color = MaterialTheme.colorScheme.secondary)
-                ClickableText(AnnotatedString(post.magazine.name), onClick = onClick)
-                Text(
-                    text = post.title,
-                    fontSize = 22.sp,
-                    modifier = Modifier.padding(horizontal = 0.dp, vertical = 5.dp)
+                ClickableText(
+                    text = AnnotatedString(post.magazine.name),
+                    style = TextStyle(
+                        color = MaterialTheme.colorScheme.secondary,
+                        fontSize = 16.sp
+                    ),
+                    onClick = onClick
+                )
+                ClickableText(
+                    text = AnnotatedString(post.title),
+                    style = TextStyle(
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        fontSize = 22.sp
+                    ),
+                    modifier = Modifier.padding(horizontal = 0.dp, vertical = 5.dp),
+                    onClick = onClick
                 )
             }
             Spacer(modifier = Modifier.padding(vertical = 1.dp))
-            CardHeader(creator = post.creator.name, created = post.created)
-            MarkdownBody(source = post.body)
+            CardHeader(post)
+            MarkdownBody(
+                source = post.body,
+                onClick = onClick
+            )
         }
 
         Row {
@@ -59,9 +73,7 @@ fun ThreadCard(post: Post, onClick: (Int) -> Unit) {
 fun ThreadCardPreview() {
     CopepodTheme {
         Column {
-            ThreadCard(TEST_THREADS[1], onClick = {
-
-            })
+            ThreadCard(TEST_THREADS[1], onClick = {})
         }
     }
 }

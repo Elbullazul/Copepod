@@ -2,7 +2,9 @@ package dev.elbullazul.copepod.ui.fragments.views
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -13,7 +15,12 @@ import dev.elbullazul.copepod.ui.fragments.cards.ThreadCard
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun ThreadListView(magId: String? = null) {
+// TODO: find a way to dynamically loads posts for following views
+// magazine thread view, homepage thread view, etc.
+// maybe different loaders but a main rendering function?
+// ex. MagListView(magId) { val threads = get_mag_threads(magId); ThreadListView(threads, etc.)
+// TODO: implement event parameters
+fun ThreadListView(onThreadClick: (threadId: String) -> Unit) {
     val context = LocalContext.current
     val threads = TEST_THREADS
 
@@ -22,8 +29,11 @@ fun ThreadListView(magId: String? = null) {
     LazyColumn {
         for (thread in threads) {
             item {
-                ThreadCard(post = thread, onClick = {
-                    ShowToast(context, "opening thread ${thread.title}")
+                ThreadCard(post = thread, onClick =
+                {
+                    onThreadClick(thread.id)
+//                    ShowToast(context, "opening thread ${thread.title}")
+
                 })
 
                 if (thread != threads.last()) {
