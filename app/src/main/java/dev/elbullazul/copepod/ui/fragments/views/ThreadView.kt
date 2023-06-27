@@ -7,14 +7,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.ui.fragments.cards.CommentCard
 import dev.elbullazul.copepod.ui.fragments.cards.ThreadCard
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun ThreadView(thread: dev.elbullazul.copepod.api.kbin.models.Thread) {
+fun ThreadView() {
     val context = LocalContext.current
+    val thread = TEST_THREADS[2]
 
     LazyColumn {
         // TODO: show thread content first, then comments

@@ -18,7 +18,7 @@ object Overview: NavItem {
     override val label = R.string.home
     override val icon = Icons.Outlined.Home
     override val route = "threads"
-    override val view: @Composable () -> Unit = { ThreadListView(threads = TEST_THREADS) }
+    override val view: @Composable () -> Unit = { ThreadListView() }
 }
 
 // TODO: implement view
@@ -34,11 +34,7 @@ object Blogs: NavItem {
     override val label = R.string.blogs
     override val icon = Icons.Outlined.Edit
     override val route = "blogs"
-    override val view: @Composable () -> Unit = { UserProfileView(
-        comments = TEST_COMMENTS,
-        threads = TEST_THREADS,
-        blogs = emptyList()
-    ) }
+    override val view: @Composable () -> Unit = { UserProfileView() }
 }
 
 // TODO: implement view
@@ -50,7 +46,7 @@ object Settings: NavItem {
 }
 
 object Screens {
-    val NavItems = listOf<NavItem>(
+    val NavItems = listOf(
         Overview,
         Magazines,
         Blogs,

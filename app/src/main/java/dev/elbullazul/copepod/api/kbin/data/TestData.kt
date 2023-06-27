@@ -1,5 +1,6 @@
 package dev.elbullazul.copepod.api.kbin.data
 
+import dev.elbullazul.copepod.api.kbin.models.Blog
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.api.kbin.models.Magazine
 import dev.elbullazul.copepod.api.kbin.models.User
@@ -132,5 +133,12 @@ var TEST_THREADS = listOf(
         url = "https://lemmy.world/",
         originUrl = "",
         replies = emptyList()
+    )
+)
+
+var TEST_BLOGS = listOf(
+    Blog(
+        creator = TEST_USERS[0],
+
     )
 )

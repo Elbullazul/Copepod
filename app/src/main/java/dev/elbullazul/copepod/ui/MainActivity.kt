@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.elbullazul.copepod.api.kbin.Wrapper
 import dev.elbullazul.copepod.ui.fragments.common.BottomBar
 import dev.elbullazul.copepod.ui.fragments.common.TopBar
 import dev.elbullazul.copepod.ui.navigation.Overview

@@ -6,11 +6,15 @@ import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.elbullazul.copepod.api.kbin.data.TEST_COMMENTS
 import dev.elbullazul.copepod.ui.fragments.cards.CommentCard
 import dev.elbullazul.copepod.api.kbin.models.Comment
 
 @Composable
-fun CommentListView(comments: List<Comment>) {
+fun CommentListView() {
+    // test data
+    val comments = TEST_COMMENTS
+
     LazyColumn {
         // TODO: make a CommentList component?
         for (comment in comments) {

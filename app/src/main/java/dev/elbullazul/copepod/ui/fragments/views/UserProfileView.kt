@@ -12,20 +12,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import dev.elbullazul.copepod.R
 import dev.elbullazul.copepod.api.common.models.Post
+import dev.elbullazul.copepod.api.kbin.data.TEST_COMMENTS
+import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.api.kbin.data.TEST_USERS
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.api.kbin.models.Thread
 import dev.elbullazul.copepod.ui.fragments.cards.ProfileCard
 
 @Composable
-fun UserProfileView(comments: List<Comment>, threads: List<Thread>, blogs: List<Post>) {
+// TODO: remove null default when testing complete
+fun UserProfileView(userId: String? = null) {
     val tabList = listOf(
         stringResource(R.string.comments),
         stringResource(R.string.threads),
         stringResource(R.string.blogs)
     )
     var tabIndex by remember { mutableStateOf(0) }
+
+    // test data
     val user = TEST_USERS[0]
+    val comments = TEST_COMMENTS
+    val threads = TEST_THREADS
 
     Column {
         // user header
@@ -42,9 +49,8 @@ fun UserProfileView(comments: List<Comment>, threads: List<Thread>, blogs: List<
             }
         }
         when (tabIndex) {
-            0 -> CommentListView(comments)
-            1 -> ThreadListView(threads)
-            // TODO: composable Blog (show boosts and replies will be toggles instead of tabs?)
+            0 -> CommentListView()  // specify comment Id
+            1 -> ThreadListView()   // specify magazine if mag view desired
             2 -> Text("Blogs")
         }
     }

@@ -23,25 +23,21 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.elbullazul.copepod.R
-import dev.elbullazul.copepod.api.common.actions.Boosts
-import dev.elbullazul.copepod.api.common.actions.DOWNVOTED
-import dev.elbullazul.copepod.api.common.actions.Favorites
-import dev.elbullazul.copepod.api.common.actions.NOT_VOTED
-import dev.elbullazul.copepod.api.common.actions.UPVOTED
-import dev.elbullazul.copepod.api.common.actions.Votes
+import dev.elbullazul.copepod.api.common.interfaces.Boosts
+import dev.elbullazul.copepod.api.common.interfaces.Favorites
+import dev.elbullazul.copepod.api.common.interfaces.VoteStatus
+import dev.elbullazul.copepod.api.common.interfaces.Votes
 import dev.elbullazul.copepod.api.common.models.Post
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
 fun CommentActionButton(icon: ImageVector, text: String, description: String, pressed: Boolean, onClick: () -> Unit) {
     TextButton(contentPadding = PaddingValues(0.dp), onClick = onClick) {
-        val color: Color
 
-        if (pressed) {
-            color = MaterialTheme.colorScheme.primary
-        }
-        else {
-            color = MaterialTheme.colorScheme.secondary
+        val color: Color = if (pressed) {
+            MaterialTheme.colorScheme.primary
+        } else {
+            MaterialTheme.colorScheme.secondary
         }
 
         Icon(
@@ -70,20 +66,20 @@ fun CardFooter(post: Post) {
                 icon = Icons.Outlined.KeyboardArrowUp,
                 text = post.upvotes.toString(),
                 description = stringResource(R.string.upvote),
-                pressed = (post.vote == UPVOTED),
+                pressed = (post.vote == VoteStatus.UPVOTED),
                 onClick = {
                     ShowToast(context, "Upvoted")
-                    post.vote = UPVOTED
+                    post.vote = VoteStatus.UPVOTED
                 }
             )
             CommentActionButton(
                 icon = Icons.Outlined.KeyboardArrowDown,
                 text = post.downvotes.toString(),
                 description = stringResource(R.string.downvote),
-                pressed = (post.vote == DOWNVOTED),
+                pressed = (post.vote == VoteStatus.DOWNVOTED),
                 onClick = {
                     ShowToast(context, "Downvoted")
-                    post.vote = DOWNVOTED
+                    post.vote = VoteStatus.DOWNVOTED
                 }
             )
         }

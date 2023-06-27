@@ -1,28 +1,38 @@
 package dev.elbullazul.copepod.api.kbin
 
-import dev.elbullazul.copepod.api.kbin.models.Comment
+import dev.elbullazul.copepod.api.kbin.data.TEST_MAGAZINES
+import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.api.kbin.models.Magazine
 import dev.elbullazul.copepod.api.kbin.models.Thread
 
-class Wrapper {
+class Wrapper() {
 
+    val token: String = ""      // TODO: load from memory
+
+    // TODO: authenticate with kbin via API
     fun Authenticate(): Boolean {
-        return false
+        return true
     }
 
-    fun GetFeed(userId: String): List<Thread> {
-        return emptyList()
+    fun GetDefaultFeed(): List<Thread> {
+        return TEST_THREADS
     }
 
-    fun GetSubscriptions(userId: String): List<Magazine> {
-        return emptyList()
+    // get user feed
+    fun GetHomeFeed(id: String): List<Thread> {
+        return TEST_THREADS
     }
 
-    fun GetThread(threadId: String): Thread {
-        return Thread()
+    // get user subscriptions
+    fun GetMagazineSubscriptions(id: String): List<Magazine> {
+        return TEST_MAGAZINES
     }
 
-    fun GetComment(commentId: String): Comment {
-        return Comment()
+    // use for Post and Comments, cast as needed
+    fun GetThread(id: String): Thread {
+        return TEST_THREADS[2]
     }
+
+    // TODO?
+    //fun GetComment(id: String)
 }

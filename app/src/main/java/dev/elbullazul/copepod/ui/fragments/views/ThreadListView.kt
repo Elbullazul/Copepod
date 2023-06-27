@@ -7,17 +7,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.api.kbin.models.Thread
 import dev.elbullazul.copepod.ui.fragments.cards.ThreadCard
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun ThreadListView(threads: List<Thread>) {
+fun ThreadListView(magId: String? = null) {
     val context = LocalContext.current
+    val threads = TEST_THREADS
+
+    // TODO: implement retrieval of data
 
     LazyColumn {
-        // TODO: make a ThreadView component?
-
         for (thread in threads) {
             item {
                 ThreadCard(post = thread, onClick = {
@@ -31,7 +33,7 @@ fun ThreadListView(threads: List<Thread>) {
         }
     }
 
-    // events
+// events
 //    onThreadClick()
 //    onUserClick()
 //    onMagazineClick
