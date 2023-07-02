@@ -15,7 +15,7 @@ import dev.elbullazul.copepod.ui.theme.CopepodTheme
 
 // TODO: support comment tree (connect to parent comment node)
 @Composable
-fun CommentCard(comment: Comment) {
+fun CommentCard(comment: Comment, onUserClick: (Int) -> Unit) {
 
     /* TODO: actions */
     // parse content and display media and styles correctly
@@ -26,7 +26,7 @@ fun CommentCard(comment: Comment) {
     // TODO: apply horizontal padding to everything minus the Footer
     Column {
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-            CardHeader(comment)
+            CardHeader(comment, onUserClick = onUserClick)
             MarkdownBody(comment.body)
         }
         CardFooter(comment)
@@ -38,7 +38,7 @@ fun CommentCard(comment: Comment) {
 fun CommentCardPreview() {
     CopepodTheme {
         Column() {
-            CommentCard(TEST_COMMENTS[0])
+            CommentCard(TEST_COMMENTS[0], onUserClick = {})
         }
     }
 }

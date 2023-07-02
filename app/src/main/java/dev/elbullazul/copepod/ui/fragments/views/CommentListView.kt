@@ -19,7 +19,7 @@ fun CommentListView() {
         // TODO: make a CommentList component?
         for (comment in comments) {
             item {
-                CommentCard(comment)
+                CommentCard(comment, onUserClick = {})
 
                 // divider only if not last
                 if (comment != comments.last()) {

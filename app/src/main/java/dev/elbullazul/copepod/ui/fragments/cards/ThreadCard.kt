@@ -25,7 +25,7 @@ import dev.elbullazul.copepod.api.kbin.models.Thread
 import dev.elbullazul.copepod.ui.theme.CopepodTheme
 
 @Composable
-fun ThreadCard(post: Post, onClick: (Int) -> Unit) {
+fun ThreadCard(post: Post, onClick: (Int) -> Unit, onUserClick: (Int) -> Unit) {
     // TODO: add community/magazine (requires rework to Thread object)
     // TODO: implement onClick action
     Column {
@@ -50,7 +50,7 @@ fun ThreadCard(post: Post, onClick: (Int) -> Unit) {
                 )
             }
             Spacer(modifier = Modifier.padding(vertical = 1.dp))
-            CardHeader(post)
+            CardHeader(post, onUserClick = onUserClick)
             MarkdownBody(
                 source = post.body,
                 onClick = onClick
@@ -73,7 +73,7 @@ fun ThreadCard(post: Post, onClick: (Int) -> Unit) {
 fun ThreadCardPreview() {
     CopepodTheme {
         Column {
-            ThreadCard(TEST_THREADS[1], onClick = {})
+            ThreadCard(TEST_THREADS[1], onClick = {}, onUserClick = {})
         }
     }
 }

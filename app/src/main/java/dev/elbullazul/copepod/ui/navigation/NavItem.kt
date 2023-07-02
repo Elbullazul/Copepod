@@ -7,5 +7,4 @@ interface NavItem {
     val label: Int
     val icon: ImageVector
     val route: String
-//    val view: @Composable () -> Unit
 }

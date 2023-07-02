@@ -9,6 +9,8 @@ class User(
     id: String = "",
     name: String = "",
 
+    userId: String = "",    // kbin-specific user ID
+
     override var avatar: String = "",
     override var displayName: String = "",
 ): Actor(id, name, PERSON_ACTOR),

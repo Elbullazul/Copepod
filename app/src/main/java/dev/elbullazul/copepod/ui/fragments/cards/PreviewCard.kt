@@ -21,7 +21,7 @@ import dev.elbullazul.copepod.api.common.models.PERSON_ACTOR
 // TODO: could be reused for magazine/community header
 
 @Composable
-fun ProfileCard(actor: Actor) {
+fun PreviewCard(actor: Actor) {
     Column(modifier = Modifier.padding(15.dp)) {
         Row {
             if (actor.type == PERSON_ACTOR) {

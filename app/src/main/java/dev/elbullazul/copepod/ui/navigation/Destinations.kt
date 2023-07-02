@@ -5,63 +5,57 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import dev.elbullazul.copepod.R
-import dev.elbullazul.copepod.ui.fragments.views.BlogListView
-import dev.elbullazul.copepod.ui.fragments.views.MagazineListView
-import dev.elbullazul.copepod.ui.fragments.views.SettingsView
-import dev.elbullazul.copepod.ui.fragments.views.ThreadListView
 
-// main screens
-object Overview: NavItem {
+object HomeScreen: NavItem {
     override val label = R.string.home
     override val icon = Icons.Outlined.Home
     override val route = "threads"
-//    override val view: @Composable () -> Unit = { ThreadListView() }
 }
 
-object Magazines: NavItem {
+object MagazineListScreen: NavItem {
     override val label = R.string.magazines
     override val icon = Icons.Outlined.List
     override val route = "magazines"
-//    override val view: @Composable () -> Unit = { MagazineListView() }
 }
 
-object Blogs: NavItem {
+object BlogListScreen: NavItem {
     override val label = R.string.blogs
     override val icon = Icons.Outlined.Edit
     override val route = "blogs"
-//    override val view: @Composable () -> Unit = { BlogListView() }
 }
 
-object Settings: NavItem {
+object SettingsScreen: NavItem {
     override val label = R.string.settings
     override val icon = Icons.Outlined.Settings
     override val route = "settings"
-//    override val view: @Composable () -> Unit = { SettingsView() }
 }
 
 // content screens
-// TODO: rename?
-object PostView: NavItem {
+object ThreadScreen: NavItem {
     override val label = R.string.home
     override val icon = Icons.Outlined.Home
     override val route = "thread"
-//    override val view: @Composable () -> Unit = { ThreadListView() }
+
     const val threadIdArg: String = "threadId"
+
+    val routeWithArgs = "${route}/{${threadIdArg}}"
     val arguments = listOf(
         navArgument(threadIdArg) { type = NavType.StringType }
     )
 }
 
+object UserScreen: NavItem {
+    override val label = R.string.home
+    override val icon = Icons.Outlined.Home
+    override val route = "user"
 
-object Screens {
-    val NavItems = listOf(
-        Overview,
-        Magazines,
-        Blogs,
-        Settings
+    const val userNameArg: String = "userName"
+
+    val routeWithArgs = "${route}/{${userNameArg}}"
+    val arguments = listOf(
+        navArgument(userNameArg) { type = NavType.StringType }
     )
 }

@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 @Composable
-fun CardHeader(post: Post) {
+fun CardHeader(post: Post, onUserClick: (Int) -> Unit) {
     val context = LocalContext.current
 
     Row(modifier = Modifier.padding(horizontal = 0.dp, vertical = 5.dp)) {
@@ -36,10 +36,7 @@ fun CardHeader(post: Post) {
                 color = MaterialTheme.colorScheme.primary,
                 fontSize = 16.sp
             ),
-            onClick = {
-                ShowToast(context, "Opening user ${post.creator.name} profile")
-//                UserProfileView(post.creator.id)
-            }
+            onClick = onUserClick
         )
         Spacer(Modifier.weight(1f))
 

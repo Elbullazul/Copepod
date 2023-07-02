@@ -11,17 +11,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import dev.elbullazul.copepod.R
-import dev.elbullazul.copepod.api.common.models.Post
 import dev.elbullazul.copepod.api.kbin.data.TEST_COMMENTS
 import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.api.kbin.data.TEST_USERS
-import dev.elbullazul.copepod.api.kbin.models.Comment
-import dev.elbullazul.copepod.api.kbin.models.Thread
-import dev.elbullazul.copepod.ui.fragments.cards.ProfileCard
+import dev.elbullazul.copepod.ui.fragments.cards.PreviewCard
 
 @Composable
 // TODO: remove null default when testing complete
-fun UserProfileView(userId: String? = null) {
+fun UserProfileView(
+    userName: String? = null,
+    onThreadClick: (String) -> Unit,
+    onCommentClick: (String) -> Unit,
+    onBlogClick: (String) -> Unit
+) {
     val tabList = listOf(
         stringResource(R.string.comments),
         stringResource(R.string.threads),
@@ -36,7 +38,7 @@ fun UserProfileView(userId: String? = null) {
 
     Column {
         // user header
-        ProfileCard(user)
+        PreviewCard(user)
 
         // user submission tabs
         TabRow(selectedTabIndex = tabIndex) {
@@ -49,9 +51,15 @@ fun UserProfileView(userId: String? = null) {
             }
         }
         when (tabIndex) {
-            0 -> CommentListView()  // specify comment Id
-//            1 -> ThreadListView()   // specify magazine if mag view desired
-            2 -> Text("Blogs")
+            0 -> CommentListView()
+            1 -> ThreadListView(
+                onThreadClick = onThreadClick,
+                onUserClick = {},    // do nothing since only current user posts appear
+            )
+            2 -> Text(
+                "Blogs"
+//            onBlogClick
+            )
         }
     }
 }

@@ -20,21 +20,32 @@ import dev.elbullazul.copepod.ui.helpers.ShowToast
 // maybe different loaders but a main rendering function?
 // ex. MagListView(magId) { val threads = get_mag_threads(magId); ThreadListView(threads, etc.)
 // TODO: implement event parameters
-fun ThreadListView(onThreadClick: (threadId: String) -> Unit) {
+fun ThreadListView(
+    groupId: String? = null,
+    onThreadClick: (threadId: String) -> Unit,
+    onUserClick: (userId: String) -> Unit
+) {
     val context = LocalContext.current
     val threads = TEST_THREADS
+
+    if (groupId != null) {
+        // load threads from group
+        // groupId instead of thread (lemmy) or magazine (kbin)
+    }
 
     // TODO: implement retrieval of data
 
     LazyColumn {
         for (thread in threads) {
             item {
-                ThreadCard(post = thread, onClick =
-                {
-                    onThreadClick(thread.id)
-//                    ShowToast(context, "opening thread ${thread.title}")
-
-                })
+                ThreadCard(post = thread,
+                    onClick = {
+                        onThreadClick(thread.id)
+                    },
+                    onUserClick = {
+                        onUserClick(thread.creator.name)
+                    },
+                )
 
                 if (thread != threads.last()) {
                     Divider(modifier = Modifier.padding(0.dp, 5.dp))
@@ -44,11 +55,11 @@ fun ThreadListView(onThreadClick: (threadId: String) -> Unit) {
     }
 
 // events
-//    onThreadClick()
-//    onUserClick()
+//    onThreadClick
+//    onUserClick
 //    onMagazineClick
 //    onUpvoteClick
 //    onDownvoteClick
-//    onBoostClick()
+//    onBoostClick
 //    onFavoriteClick
 }

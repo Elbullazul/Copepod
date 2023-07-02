@@ -11,25 +11,22 @@ import dev.elbullazul.copepod.api.kbin.data.TEST_THREADS
 import dev.elbullazul.copepod.api.kbin.models.Comment
 import dev.elbullazul.copepod.ui.fragments.cards.CommentCard
 import dev.elbullazul.copepod.ui.fragments.cards.ThreadCard
-import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable
-fun ThreadView(threadId: String? = "0") {
+fun ThreadView(threadId: String? = "0", onUserClick: (Int) -> Unit) {
     val context = LocalContext.current
     val thread = TEST_THREADS[2]
 
     LazyColumn {
         // TODO: show thread content first, then comments
         item {
-            ThreadCard(thread, onClick = {
-                ShowToast(context, "opening thread ${thread.title}")
-            })
+            ThreadCard(thread, onClick = {}, onUserClick = {})
             Divider(modifier = Modifier.padding(0.dp, 5.dp))
         }
 
         for (comment in thread.replies) {
             item {
-                CommentCard(comment as Comment)
+                CommentCard(comment as Comment, onUserClick = onUserClick)
 
                 if (comment != thread.replies.last()) {
                     Divider(modifier = Modifier.padding(0.dp, 5.dp))
