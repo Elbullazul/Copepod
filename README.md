@@ -1,2 +1,2 @@
 # Copepod
-A wannabe kbin Android client
+A gestating fediverse client
