@@ -8,9 +8,12 @@ import dev.elbullazul.copepod.ui.fragments.cards.PreviewCard
 @Composable
 fun ActorListView() {
     LazyColumn() {
-        for (mag in TEST_MAGAZINES) {
+        // TODO: load actors based on user subscription or server results
+        val actors = TEST_MAGAZINES
+
+        for (actor in actors) {
             item {
-                PreviewCard(actor = mag)
+                PreviewCard(actor = actor)
             }
         }
     }

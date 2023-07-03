@@ -45,14 +45,15 @@ fun App() {
 //                    TopBar()
                      TopAppBar(title = { Text(text = stringResource(R.string.app_name)) },
                          navigationIcon = {
-//                             if (navController.previousBackStackEntry != null) {
+                             // TODO: fix this
+                             if (navController.currentDestination?.route != HomeScreen.route) {
                                  IconButton(onClick = { navController.navigateUp() }) {
                                      Icon(
                                          imageVector = Icons.Filled.ArrowBack,
                                          contentDescription = "back"
                                      )
                                  }
-//                             } else { null }
+                             } else { null }
                          }
                      )
                  },

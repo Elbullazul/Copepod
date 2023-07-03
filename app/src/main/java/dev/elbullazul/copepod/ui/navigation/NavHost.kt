@@ -60,7 +60,7 @@ fun CopepodNavHost(navController: NavHostController, startDestination: String, m
                     navController.navigate("${ThreadScreen.route}/${threadId}")
                 },
                 onCommentClick = {
-                    // TODO: load comment.root as thread and only show comment as only child
+                    // TODO: load comment.root as thread and show current comment as only child?
                 },
                 onBlogClick = {
                     // TODO
