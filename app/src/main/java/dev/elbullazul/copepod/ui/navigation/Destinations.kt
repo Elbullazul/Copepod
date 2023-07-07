@@ -15,16 +15,11 @@ object HomeScreen: NavItem {
     override val route = "threads"
 }
 
+// TODO: rename
 object MagazineListScreen: NavItem {
     override val label = R.string.magazines
     override val icon = Icons.Outlined.List
     override val route = "magazines"
-}
-
-object BlogListScreen: NavItem {
-    override val label = R.string.blogs
-    override val icon = Icons.Outlined.Edit
-    override val route = "blogs"
 }
 
 object SettingsScreen: NavItem {

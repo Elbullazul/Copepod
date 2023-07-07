@@ -5,43 +5,50 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import dev.elbullazul.copepod.ui.fragments.views.BlogListView
+import dev.elbullazul.copepod.backends.common.Wrapper
 import dev.elbullazul.copepod.ui.fragments.views.ActorListView
 import dev.elbullazul.copepod.ui.fragments.views.SettingsView
-import dev.elbullazul.copepod.ui.fragments.views.ThreadListView
-import dev.elbullazul.copepod.ui.fragments.views.ThreadView
-import dev.elbullazul.copepod.ui.fragments.views.UserProfileView
+import dev.elbullazul.copepod.ui.fragments.views.PostListView
+import dev.elbullazul.copepod.ui.fragments.views.PostView
+import dev.elbullazul.copepod.ui.fragments.views.UserView
 
 @Composable
-fun CopepodNavHost(navController: NavHostController, startDestination: String, modifier: Modifier) {
+fun CopepodNavHost(navController: NavHostController, startDestination: String, modifier: Modifier, wrapper: Wrapper) {
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier
     ) {
         composable(HomeScreen.route) {
-            ThreadListView(
+            PostListView(
                 onThreadClick = { threadId ->
                     navController.navigate("${ThreadScreen.route}/${threadId}")
                 },
                 onUserClick = { userName ->
                     navController.navigate("${UserScreen.route}/${userName}")
+                },
+                onGroupClick = { groupId ->
+                    navController.navigate("${UserScreen.route}/${groupId}")
                 }
+            // on post boost
+            // on post favorite
+            // on post bookmark
+            // on post vote
+            // on post react
             )
-//                        Overview.view()
         }
+
         composable(MagazineListScreen.route) { ActorListView() }
-        composable(BlogListScreen.route) { BlogListView() }
         composable(SettingsScreen.route) { SettingsView() }
 
-        // thread view
+        // post view
         composable(
             route = ThreadScreen.routeWithArgs,
             arguments = ThreadScreen.arguments
         ) { navBackStackEntry ->
             val threadId = navBackStackEntry.arguments?.getString(ThreadScreen.threadIdArg)
 
-            ThreadView(
+            PostView(
                 threadId = threadId,
                 onUserClick = { userName ->
                     navController.navigate("${UserScreen.route}/${userName}")
@@ -54,16 +61,10 @@ fun CopepodNavHost(navController: NavHostController, startDestination: String, m
         ) { navBackStackEntry ->
             val userName = navBackStackEntry.arguments?.getString(UserScreen.routeWithArgs)
 
-            UserProfileView(
+            UserView(
                 userName = userName,
                 onThreadClick = { threadId ->
                     navController.navigate("${ThreadScreen.route}/${threadId}")
-                },
-                onCommentClick = {
-                    // TODO: load comment.root as thread and show current comment as only child?
-                },
-                onBlogClick = {
-                    // TODO
                 }
             )
         }

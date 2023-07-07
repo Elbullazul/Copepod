@@ -23,11 +23,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.elbullazul.copepod.R
-import dev.elbullazul.copepod.api.common.interfaces.Boosts
-import dev.elbullazul.copepod.api.common.interfaces.Favorites
-import dev.elbullazul.copepod.api.common.interfaces.VoteStatus
-import dev.elbullazul.copepod.api.common.interfaces.Votes
-import dev.elbullazul.copepod.api.common.models.Post
+import dev.elbullazul.copepod.backends.common.features.Boosts
+import dev.elbullazul.copepod.backends.common.features.Favorites
+import dev.elbullazul.copepod.backends.common.features.Votes
+import dev.elbullazul.copepod.backends.common.models.Post
+import dev.elbullazul.copepod.backends.common.types.VoteStatus
 import dev.elbullazul.copepod.ui.helpers.ShowToast
 
 @Composable

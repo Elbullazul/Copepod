@@ -4,7 +4,6 @@ object BottomNavigation {
     val NavItems = listOf(
         HomeScreen,
         MagazineListScreen,
-        BlogListScreen,
         SettingsScreen
     )
 }

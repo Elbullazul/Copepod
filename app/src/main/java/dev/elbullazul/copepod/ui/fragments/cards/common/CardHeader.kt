@@ -13,11 +13,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.elbullazul.copepod.api.common.models.Post
-import dev.elbullazul.copepod.ui.fragments.views.UserProfileView
-import dev.elbullazul.copepod.ui.helpers.ShowToast
+import dev.elbullazul.copepod.backends.common.models.Post
 import java.text.SimpleDateFormat
-import java.util.Date
 
 @Composable
 fun CardHeader(post: Post, onUserClick: (Int) -> Unit) {

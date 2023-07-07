@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
 import dev.elbullazul.copepod.R
+import dev.elbullazul.copepod.backends.common.Wrapper
+import dev.elbullazul.copepod.backends.kbin.KbinWrapper
 import dev.elbullazul.copepod.ui.fragments.common.BottomBar
 import dev.elbullazul.copepod.ui.navigation.CopepodNavHost
 import dev.elbullazul.copepod.ui.navigation.HomeScreen
@@ -34,6 +36,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     val navController = rememberNavController()
+    var serviceWrapper: Wrapper = KbinWrapper()
 
     CopepodTheme {
         Surface(
@@ -59,7 +62,7 @@ fun App() {
                  },
                 bottomBar = { BottomBar(navController = navController) }
             ) { contentPadding ->
-                CopepodNavHost(navController, HomeScreen.route, Modifier.padding(contentPadding))
+                CopepodNavHost(navController, HomeScreen.route, Modifier.padding(contentPadding), serviceWrapper)
             }
         }
     }
